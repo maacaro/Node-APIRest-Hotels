@@ -16,11 +16,11 @@ app.get('/search', (req, res) => {
     if(req.query.hotelName && stars.length > 0 && stars.every(item => item !=='ALL')){
         return  res.status(200).type('application/json')
         .json(data
-            .filter(hotel => (hotel.name.includes(req.query.hotelName) && stars.includes(hotel.stars.toString()))));
+            .filter(hotel => (hotel.name.toUpperCase().includes(req.query.hotelName.toUpperCase()) && stars.includes(hotel.stars.toString()))));
         }    
         
     if(req.query.hotelName){
-        return res.status(200).type('application/json').json(data.filter(hotel => hotel.name.includes(req.query.hotelName)));
+        return res.status(200).type('application/json').json(data.filter(hotel => hotel.name.toUpperCase().includes(req.query.hotelName.toUpperCase())));
     }
     if(stars.length > 0){
         return  res.status(200).type('application/json').json(data.filter(hotel => stars.includes(hotel.stars.toString()))); 
